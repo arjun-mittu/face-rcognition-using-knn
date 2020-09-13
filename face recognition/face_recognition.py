@@ -5,8 +5,6 @@ from train_model import model
 face_classifier = cv2.CascadeClassifier('Haarcascades/haarcascade_frontalface_default.xml')
 
 def face_detector(img, size=0.5):
-    
-    # Convert image to grayscale
     gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
     faces = face_classifier.detectMultiScale(gray, 1.3, 5)
     if faces is ():
@@ -19,7 +17,6 @@ def face_detector(img, size=0.5):
     return img, roi
 
 
-# Open Webcam
 cap = cv2.VideoCapture(0)
 
 while True:
@@ -31,8 +28,6 @@ while True:
     try:
         face = cv2.cvtColor(face, cv2.COLOR_BGR2GRAY)
 
-        # Pass face to prediction model
-        # "results" comprises of a tuple containing the label and the confidence value
         results = model.predict(face)
         
         if results[1] < 500:
